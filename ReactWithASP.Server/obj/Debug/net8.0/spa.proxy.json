@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\pc\\source\\repos\\ReactWithASP\\ReactWithASP.Server\\..\\reactwithasp.client",
+"WorkingDirectory": "C:\\Users\\pc\\Source\\Repos\\Valdas-K\\ReactWithASP\\ReactWithASP.Server\\..\\reactwithasp.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
