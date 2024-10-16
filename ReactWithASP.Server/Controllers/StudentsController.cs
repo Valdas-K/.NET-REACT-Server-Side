@@ -1,25 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ReactWithASP.Server.Data;
-using ReactWithASP.Server.Models.DTOs;
-
-namespace ReactWithASP.Server.Controllers;
+﻿namespace ReactWithASP.Server.Controllers;
 
 [ApiController]
 [Route ("api/[controller]")]
-public class StudentsController(AppDbContext context) : ControllerBase
+[Authorize]
+public class StudentsController(IGetService<StudentDto> getStudentService, ISaveStudentService saveStudentService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var students = await context.Students.ToListAsync();
-        List<StudentDto> results = [];
-        foreach (var student in students)
-        {
-            results.Add(new StudentDto(student.Id, $"{student.FirstName} {student.LastName}", student.Email, student.Course, student.Address));
-        }
-
+        var results = await getStudentService.GetAll();
         return Ok(results);
     }
 
+    [HttpPut("{id:int}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Put(int id, StudentDto dto)
+    {
+        await saveStudentService.Update(id, dto);
+        return Ok();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Post(StudentDto dto)
+    {
+        await saveStudentService.Store(dto);
+        return Ok();
+    }
 }
