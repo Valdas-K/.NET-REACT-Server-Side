@@ -5,7 +5,11 @@ namespace ReactWithASP.Server.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class ProgrammesController(IGetService<ProgrammeDto> getProgrammeService, ISaveService<ProgrammeDto> saveProgrammeService) : ControllerBase
+public class ProgrammesController(
+    IGetService<ProgrammeDto> getProgrammeService,
+    ISaveService<ProgrammeDto> saveProgrammeService,
+    IDeleteService<ProgrammeDto> deleteProgrammeService
+    ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -22,9 +26,8 @@ public class ProgrammesController(IGetService<ProgrammeDto> getProgrammeService,
         return Ok();
     }
 
-    [HttpPost]
+    [HttpPost("{id:int}")]
     [ValidateAntiForgeryToken]
-    [Authorize]
     public async Task<IActionResult> Post(ProgrammeDto dto)
     {
         await saveProgrammeService.Store(dto);
@@ -35,7 +38,7 @@ public class ProgrammesController(IGetService<ProgrammeDto> getProgrammeService,
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Remove(int id, ProgrammeDto dto)
     {
-        await saveProgrammeService.Delete(id, dto);
+        await deleteProgrammeService.Delete(id, dto);
         return Ok();
     }
 }

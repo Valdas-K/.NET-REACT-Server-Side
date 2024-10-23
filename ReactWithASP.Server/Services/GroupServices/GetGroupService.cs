@@ -1,4 +1,4 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.GroupServices;
 public class GetGroupService(AppDbContext context) : IGetService<GroupDto>
 {
     public async Task<List<GroupDto>> GetAll()
@@ -19,5 +19,5 @@ public class GetGroupService(AppDbContext context) : IGetService<GroupDto>
     }
 
     private GroupDto MapDto(Group group)
-        => new GroupDto(group.Id, group.Title);
+        => new(group.Id, group.Title);
 }

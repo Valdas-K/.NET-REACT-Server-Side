@@ -5,7 +5,11 @@ namespace ReactWithASP.Server.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class LecturersController(IGetService<LecturerDto> getLecturerService, ISaveService<LecturerDto> saveLecturerService) : ControllerBase
+public class LecturersController(
+    IGetService<LecturerDto> getLecturerService,
+    ISaveService<LecturerDto> saveLecturerService,
+    IDeleteService<LecturerDto> deleteLecturerService
+    ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -22,7 +26,7 @@ public class LecturersController(IGetService<LecturerDto> getLecturerService, IS
         return Ok();
     }
 
-    [HttpPost]
+    [HttpPost("{id:int}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Post(LecturerDto dto)
     {
@@ -34,7 +38,7 @@ public class LecturersController(IGetService<LecturerDto> getLecturerService, IS
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Remove(int id, LecturerDto dto)
     {
-        await saveLecturerService.Delete(id, dto);
+        await deleteLecturerService.Delete(id, dto);
         return Ok();
     }
 }

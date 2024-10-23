@@ -1,4 +1,4 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.ProgrammeServices;
 
 public class SaveProgrammeService(AppDbContext context) : ISaveService<ProgrammeDto>
 {
@@ -16,16 +16,6 @@ public class SaveProgrammeService(AppDbContext context) : ISaveService<Programme
         {
             programme.SetValues(dto.Title, dto.Description);
             context.Programmes.Update(programme);
-            await context.SaveChangesAsync();
-        }
-    }
-    public async Task Delete(int Id, ProgrammeDto dto)
-    {
-        var programme = await context.Programmes.FirstOrDefaultAsync(i => i.Id == Id);
-        if (programme != null)
-        {
-            programme.SetValues(dto.Title, dto.Description);
-            context.Programmes.Remove(programme);
             await context.SaveChangesAsync();
         }
     }

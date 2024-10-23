@@ -16,12 +16,13 @@ export default function Programmes() {
         if (programme.id) {
             putApi(`programmes/${programme.id}`, programme).then(r => getProgrammes()).then(i => 1)
         } else {
+            programme.id = 1
             postApi(`programmes/${programme.id}`, programme).then(r => getProgrammes()).then(i => 1)
         }
         setVisibleModal(false)
     }
 
-    const editHandler = (programme?: IProgramme | undefined) => {
+    const editHandler = (programme?: IProgramme) => {
         setVisibleModal(true)
         setEditProgramme(programme)
     }

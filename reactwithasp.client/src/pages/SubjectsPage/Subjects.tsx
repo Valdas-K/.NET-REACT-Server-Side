@@ -16,12 +16,13 @@ export default function Subjects() {
         if (subject.id) {
             putApi(`subjects/${subject.id}`, subject).then(r => getSubjects()).then(i => 1)
         } else {
+            subject.id = 1
             postApi(`subjects/${subject.id}`, subject).then(r => getSubjects()).then(i => 1)
         }
         setVisibleModal(false)
     }
 
-    const editHandler = (subject?: ISubject | undefined) => {
+    const editHandler = (subject?: ISubject) => {
         setVisibleModal(true)
         setEditSubject(subject)
     }

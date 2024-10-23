@@ -16,12 +16,13 @@ export default function Groups() {
         if (group.id) {
             putApi(`groups/${group.id}`, group).then(r => getGroups()).then(i => 1)
         } else {
+            group.id = 1
             postApi(`groups/${group.id}`, group).then(r => getGroups()).then(i => 1)
         }
         setVisibleModal(false)
     }
 
-    const editHandler = (group?: IGroup | undefined) => {
+    const editHandler = (group?: IGroup) => {
         setVisibleModal(true)
         setEditGroup(group)
     }

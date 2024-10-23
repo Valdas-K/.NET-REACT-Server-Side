@@ -1,3 +1,11 @@
+using ReactWithASP.Server.Services;
+using ReactWithASP.Server.Services.AuthServices;
+using ReactWithASP.Server.Services.GroupServices;
+using ReactWithASP.Server.Services.LecturerServices;
+using ReactWithASP.Server.Services.ProgrammeServices;
+using ReactWithASP.Server.Services.StudentServices;
+using ReactWithASP.Server.Services.SubjectServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -68,7 +76,7 @@ services.AddSwaggerGen();
 
 services.AddScoped<IAuthService, AuthService>();
 services.AddScoped<IGetService<StudentDto>, GetStudentService>();
-services.AddScoped<ISaveStudentService, SaveStudentService>();
+services.AddScoped<ISaveService<StudentDto>, SaveStudentService>();
 services.AddScoped<IGetService<LecturerDto>, GetLecturerService>();
 services.AddScoped<ISaveService<LecturerDto>, SaveLecturerService>();
 services.AddScoped<IGetService<ProgrammeDto>, GetProgrammeService>();
@@ -78,6 +86,11 @@ services.AddScoped<ISaveService<GroupDto>, SaveGroupService>();
 services.AddScoped<IGetService<SubjectDto>, GetSubjectService>();
 services.AddScoped<ISaveService<SubjectDto>, SaveSubjectService>();
 
+services.AddScoped<IDeleteService<StudentDto>, DeleteStudentService>();
+services.AddScoped<IDeleteService<LecturerDto>, DeleteLecturerService>();
+services.AddScoped<IDeleteService<ProgrammeDto>, DeleteProgrammeService>();
+services.AddScoped<IDeleteService<GroupDto>, DeleteGroupService>();
+services.AddScoped<IDeleteService<SubjectDto>, DeleteSubjectService>();
 
 var app = builder.Build();
 app.UseCors("AllowAll");

@@ -1,4 +1,4 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.AuthServices;
 
 public class AuthService(
     UserManager<IdentityUser> userManager,
@@ -69,12 +69,12 @@ public class AuthService(
     {
         var user = httpContext.User;
         var roles = user.Claims
-            .Where(c =>  c.Type == ClaimTypes.Role)
+            .Where(c => c.Type == ClaimTypes.Role)
             .Select(c => c.Value)
             .ToList();
         if (user.Identity is not { IsAuthenticated: true }) return new AuthDto(false, "User is not authenticated");
         var userName = user.Identity.Name;
-        var userEmail = user.Claims.FirstOrDefault(c =>  c.Type == ClaimTypes.Email)?.Value;
+        var userEmail = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         return new AuthDto(true, "User is authenticated", userName, userEmail, roles[0]);
     }
 

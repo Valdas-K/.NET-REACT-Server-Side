@@ -5,7 +5,11 @@ namespace ReactWithASP.Server.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class SubjectsController(IGetService<SubjectDto> getSubjectService, ISaveService<SubjectDto> saveSubjectService) : ControllerBase
+public class SubjectsController(
+    IGetService<SubjectDto> getSubjectService, 
+    ISaveService<SubjectDto> saveSubjectService,
+    IDeleteService<SubjectDto> deleteSubjectService
+    ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -22,7 +26,7 @@ public class SubjectsController(IGetService<SubjectDto> getSubjectService, ISave
         return Ok();
     }
 
-    [HttpPost]
+    [HttpPost("{id:int}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Post(SubjectDto dto)
     {
@@ -34,7 +38,7 @@ public class SubjectsController(IGetService<SubjectDto> getSubjectService, ISave
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Remove(int id, SubjectDto dto)
     {
-        await saveSubjectService.Delete(id, dto);
+        await deleteSubjectService.Delete(id, dto);
         return Ok();
     }
 }

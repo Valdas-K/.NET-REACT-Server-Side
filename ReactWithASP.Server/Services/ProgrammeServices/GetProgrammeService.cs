@@ -1,4 +1,4 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.ProgrammeServices;
 public class GetProgrammeService(AppDbContext context) : IGetService<ProgrammeDto>
 {
     public async Task<List<ProgrammeDto>> GetAll()
@@ -19,5 +19,5 @@ public class GetProgrammeService(AppDbContext context) : IGetService<ProgrammeDt
     }
 
     private ProgrammeDto MapDto(Programme programme)
-        => new ProgrammeDto(programme.Id, programme.Title, programme.Description);
+        => new(programme.Id, programme.Title, programme.Description);
 }
