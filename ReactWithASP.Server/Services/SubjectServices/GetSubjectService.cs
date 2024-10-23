@@ -1,4 +1,4 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.SubjectServices;
 public class GetSubjectService(AppDbContext context) : IGetService<SubjectDto>
 {
     public async Task<List<SubjectDto>> GetAll()
@@ -19,5 +19,5 @@ public class GetSubjectService(AppDbContext context) : IGetService<SubjectDto>
     }
 
     private SubjectDto MapDto(Subject subject)
-        => new SubjectDto(subject.Id, subject.Title, subject.Description);
+        => new(subject.Id, subject.Title, subject.Description);
 }

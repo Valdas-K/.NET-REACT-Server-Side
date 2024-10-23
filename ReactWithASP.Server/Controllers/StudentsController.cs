@@ -1,9 +1,15 @@
-﻿namespace ReactWithASP.Server.Controllers;
+﻿using ReactWithASP.Server.Services.StudentServices;
+
+namespace ReactWithASP.Server.Controllers;
 
 [ApiController]
 [Route ("api/[controller]")]
 [Authorize]
-public class StudentsController(IGetService<StudentDto> getStudentService, ISaveStudentService saveStudentService) : ControllerBase
+public class StudentsController (
+    IGetService<StudentDto> getStudentService, 
+    ISaveService<StudentDto> saveStudentService,
+    IDeleteService<StudentDto> deleteStudentService
+    ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -20,11 +26,19 @@ public class StudentsController(IGetService<StudentDto> getStudentService, ISave
         return Ok();
     }
 
-    [HttpPost]
+    [HttpPost("{id:int}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Post(StudentDto dto)
     {
         await saveStudentService.Store(dto);
+        return Ok();
+    }
+
+    [HttpDelete("{id:int}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Remove(int id, StudentDto dto)
+    {
+        await deleteStudentService.Delete(id, dto);
         return Ok();
     }
 }

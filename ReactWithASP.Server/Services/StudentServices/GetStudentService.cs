@@ -1,5 +1,5 @@
-﻿namespace ReactWithASP.Server.Services;
-public class GetStudentService(AppDbContext context): IGetService<StudentDto>
+﻿namespace ReactWithASP.Server.Services.StudentServices;
+public class GetStudentService(AppDbContext context) : IGetService<StudentDto>
 {
     public async Task<List<StudentDto>> GetAll()
     {
@@ -19,5 +19,5 @@ public class GetStudentService(AppDbContext context): IGetService<StudentDto>
     }
 
     private StudentDto MapDto(Student student)
-        => new StudentDto(student.Id, student.FirstName, student.LastName, student.Email);
+        => new(student.Id, student.FirstName, student.LastName, student.Email);
 }

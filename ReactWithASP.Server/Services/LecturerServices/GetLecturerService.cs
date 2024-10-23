@@ -1,4 +1,4 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.LecturerServices;
 public class GetLecturerService(AppDbContext context) : IGetService<LecturerDto>
 {
     public async Task<List<LecturerDto>> GetAll()
@@ -19,5 +19,5 @@ public class GetLecturerService(AppDbContext context) : IGetService<LecturerDto>
     }
 
     private LecturerDto MapDto(Lecturer lecturer)
-        => new LecturerDto(lecturer.Id, lecturer.FirstName, lecturer.LastName, lecturer.Email, lecturer.Qualification);
+        => new(lecturer.Id, lecturer.FirstName, lecturer.LastName, lecturer.Email, lecturer.Qualification);
 }

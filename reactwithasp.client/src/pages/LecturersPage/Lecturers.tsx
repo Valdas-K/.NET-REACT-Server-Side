@@ -16,12 +16,13 @@ export default function Lecturers() {
         if (lecturer.id) {
             putApi(`lecturers/${lecturer.id}`, lecturer).then(r => getLecturers()).then(i => 1)
         } else {
+            lecturer.id = 1
             postApi(`lecturers/${lecturer.id}`, lecturer).then(r => getLecturers()).then(i => 1)
         }
         setVisibleModal(false)
     }
 
-    const editHandler = (lecturer?: ILecturer | undefined) => {
+    const editHandler = (lecturer?: ILecturer) => {
         setVisibleModal(true)
         setEditLecturer(lecturer)
     }

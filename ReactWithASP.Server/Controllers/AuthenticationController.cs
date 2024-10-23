@@ -1,4 +1,6 @@
-﻿namespace ReactWithASP.Server.Controllers;
+﻿using ReactWithASP.Server.Services.AuthServices;
+
+namespace ReactWithASP.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

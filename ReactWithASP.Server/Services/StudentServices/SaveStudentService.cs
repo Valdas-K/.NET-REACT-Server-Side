@@ -1,6 +1,6 @@
-﻿namespace ReactWithASP.Server.Services;
+﻿namespace ReactWithASP.Server.Services.StudentServices;
 
-public class SaveStudentService(AppDbContext context): ISaveStudentService
+public class SaveStudentService(AppDbContext context) : ISaveService<StudentDto>
 {
     public async Task Store(StudentDto dto)
     {
@@ -12,7 +12,7 @@ public class SaveStudentService(AppDbContext context): ISaveStudentService
     public async Task Update(int Id, StudentDto dto)
     {
         var student = await context.Students.FirstOrDefaultAsync(i => i.Id == Id);
-        if(student != null)
+        if (student != null)
         {
             student.SetValues(dto.FirstName, dto.LastName, dto.Email);
             context.Students.Update(student);
